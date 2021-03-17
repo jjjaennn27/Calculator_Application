@@ -83,7 +83,7 @@
                 android:textSize="30sp" />
 
             <Button
-                android:id="@+id/division_button"
+                android:id="@+id/Division_button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="5dp"
@@ -137,7 +137,7 @@
                 android:textSize="30sp" />
 
             <Button
-                android:id="@+id/multiply_button"
+                android:id="@+id/Multiply_button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="5dp"
@@ -191,7 +191,7 @@
                 android:textSize="30sp" />
 
             <Button
-                android:id="@+id/subtraction_button"
+                android:id="@+id/Subtraction_button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="5dp"
@@ -288,7 +288,7 @@
                 android:textSize="30sp" />
 
             <Button
-                android:id="@+id/result_button"
+                android:id="@+id/Result_button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="5dp"

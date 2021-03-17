@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,9 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
         Button getButton = findViewById(view.getId()); //버튼 생성
 
+        Log.e("buttonClick", "buttonClick 시작 : " + getButton.getText().toString() + " 버튼이 클릭되었습니다."); //Logcat에 어떤 버튼이 눌렸는지 나옴
 
         switch(getButton.getId()) {
-            case R.id.all_clear_button:
+            case R.id.all_clear_button: //AC 버튼
                 isFirstInput = true;
                 resultNumber = 0;
                 operator = '+';
@@ -40,6 +42,45 @@ public class MainActivity extends AppCompatActivity {
                 resultText.setText(String.valueOf(resultNumber)); //string으로 resultNumber를
                 break;
 
+            // 부호 버튼
+            case R.id.Addition_button:
+            case R.id.Subtraction_button:
+            case R.id.Division_button:
+            case R.id.Multiply_button:
+                int lastNum = Integer.parseInt(resultText.getText().toString());
+
+                if(operator == '+'){
+                    resultNumber = resultNumber + lastNum;
+                }else if(operator == '-') {
+                    resultNumber = resultNumber - lastNum;
+                }else if(operator == '/') {
+                    resultNumber = resultNumber / lastNum;
+                }else if(operator == '*') {
+                    resultNumber = resultNumber * lastNum;
+                }
+                operator = getButton.getText().toString().charAt(0); // charAt(0) 0번째 문자를 char로 바꿔줌
+                resultText.setText(String.valueOf(resultNumber)); //값 저장
+                isFirstInput = true;
+                break;
+
+            // = 버튼
+            case R.id.Result_button:
+                if(operator == '+'){
+                    resultNumber = resultNumber + Integer.parseInt(resultText.getText().toString());
+                }else if(operator == '-') {
+                    resultNumber = resultNumber - Integer.parseInt(resultText.getText().toString());
+                }else if(operator == '/') {
+                    resultNumber = resultNumber / Integer.parseInt(resultText.getText().toString());
+                }else if(operator == '*') {
+                    resultNumber = resultNumber * Integer.parseInt(resultText.getText().toString());
+                }
+                operator = getButton.getText().toString().charAt(0); // charAt(0) 0번째 문자를 char로 바꿔줌
+                resultText.setText(String.valueOf(resultNumber)); //값 저장
+                isFirstInput = true;
+                Log.d("buttonClick", "resultNumber = " + resultNumber); // resultNumber 값 표시
+                break;
+
+            // 0~9 버튼
             case R.id.num_0_button:
             case R.id.num_1_button:
             case R.id.num_2_button:
@@ -59,8 +100,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
 
-            default: //정의 되지 않은 버튼을 눌렀을 때
-                Toast.makeText(getApplicationContext(),getButton.getText().toString() + " 버튼이 클릭되었습니다.", Toast.LENGTH_LONG).show();
+            //정의 되지 않은 버튼을 눌렀을 때
+            default:
+                Toast.makeText(getApplicationContext(), getButton.getText().toString() + " 버튼이 클릭되었습니다.", Toast.LENGTH_LONG).show(); //토스트메시지
+                Log.e("buttonClick", "default : " + getButton.getText().toString() + " 버튼이 클릭되었습니다."); //Logcat (사용자는 볼 수 없음)
                 break;
         }
     }
