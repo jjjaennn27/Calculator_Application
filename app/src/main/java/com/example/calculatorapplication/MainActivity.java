@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     int resultNumber = 0; //계산된 결과 값을 저장하는 변수
     char operator = '+'; //입력된 연산자를 저장하는 변수
 
+    final String CLEAR_INPUT_TEXT = "0"; //상수
+
     TextView resultText; //레퍼런스 변수(주소)
 
 
@@ -39,7 +41,27 @@ public class MainActivity extends AppCompatActivity {
                 resultNumber = 0;
                 operator = '+';
                 resultText.setTextColor(0xFFA8A8A8);
-                resultText.setText(String.valueOf(resultNumber)); //string으로 resultNumber를
+                resultText.setText(CLEAR_INPUT_TEXT); //string으로 resultNumber를
+                break;
+            case R.id.clear_entry_button: //CE 버튼
+                isFirstInput = true;
+                resultText.setTextColor(0xFFA8A8A8);
+                resultText.setText(CLEAR_INPUT_TEXT);
+                break;
+            case R.id.back_space_button: //BS 버튼
+                if(resultText.getText().toString().length() > 1) //문자 길이가 1보다 크면
+                {
+                    String getResultText = resultText.getText().toString();
+                    String subString = getResultText.substring(0,getResultText.length()-1);
+                    resultText.setText(subString);
+                } else {
+                    resultText.setTextColor(0xFFA8A8A8);
+                    resultText.setText(CLEAR_INPUT_TEXT);
+                    isFirstInput=true;
+                }
+                break;
+            case R.id.decimal_button: //정수 계산기라서 아직 필요 없음
+                Log.e("buttonClick", getButton.getText().toString() + "버튼이 클릭되었습니다.");
                 break;
 
             // 부호 버튼
@@ -102,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
             //정의 되지 않은 버튼을 눌렀을 때
             default:
-                Toast.makeText(getApplicationContext(), getButton.getText().toString() + " 버튼이 클릭되었습니다.", Toast.LENGTH_LONG).show(); //토스트메시지
+                //Toast.makeText(getApplicationContext(), getButton.getText().toString() + " 버튼이 클릭되었습니다.", Toast.LENGTH_LONG).show(); //토스트메시지
                 Log.e("buttonClick", "default : " + getButton.getText().toString() + " 버튼이 클릭되었습니다."); //Logcat (사용자는 볼 수 없음)
                 break;
         }
